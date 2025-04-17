@@ -8,13 +8,13 @@ const prisma = new PrismaClient();
 
 @Injectable()
 export class AuthService {
-  async register(email: string, password: string) {
+  async register(name: string, email: string, password: string) {
     const existing = await prisma.user.findUnique({ where: { email } });
     if (existing) throw new BadRequestException('用户已存在');
 
     const hashed = await bcrypt.hash(password, 10);
     const user = await prisma.user.create({
-      data: { email, password: hashed },
+      data: { name, email, password: hashed },
     });
 
     // 创建该用户的专属数据库文件
