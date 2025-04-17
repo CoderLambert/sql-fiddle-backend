@@ -1,12 +1,15 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Request, UseGuards } from '@nestjs/common';
 import { SqlService } from './sql.service';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('sql')
 export class SqlController {
   constructor(private sqlService: SqlService) {}
 
+  @UseGuards(AuthGuard('jwt'))
   @Post('execute')
-  execute(@Body() body: { userId: number; query: string }) {
-    return this.sqlService.execute(body.userId, body.query);
+  execute(@Request() req, @Body('query') query: string) {
+    const userId = req.user.userId;
+    return this.sqlService.execute(userId, query);
   }
 }

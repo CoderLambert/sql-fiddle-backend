@@ -3,11 +3,13 @@ import { PrismaClient } from '../../generated/prisma';
 
 import * as bcrypt from 'bcryptjs';
 import * as fs from 'fs';
+import { JwtService } from '@nestjs/jwt';
 
 const prisma = new PrismaClient();
 
 @Injectable()
 export class AuthService {
+  constructor(private jwtService: JwtService) {}
   async register(name: string, email: string, password: string) {
     const existing = await prisma.user.findUnique({ where: { email } });
     if (existing) throw new BadRequestException('用户已存在');
@@ -31,9 +33,9 @@ export class AuthService {
 
     const valid = bcrypt.compare(password, user.password);
     if (!valid) throw new BadRequestException('密码错误');
+    const token = this.jwtService.sign({ sub: user.id });
 
-    // 返回 JWT 或 userId
-    return { message: '登录成功', userId: user.id };
+    return { message: '登录成功', token };
   }
 
   test() {
