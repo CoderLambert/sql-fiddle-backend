@@ -1,12 +1,12 @@
 import { Controller, Post, Body, Request, UseGuards } from '@nestjs/common';
 import { SqlService } from './sql.service';
-import { AuthGuard } from '@nestjs/passport';
+import { JWTAuthGuard } from '../auth/guards/JWTAuthGuard';
 
 @Controller('sql')
 export class SqlController {
   constructor(private sqlService: SqlService) {}
 
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(JWTAuthGuard)
   @Post('execute')
   execute(@Request() req, @Body('query') query: string) {
     const userId = req.user.userId;
