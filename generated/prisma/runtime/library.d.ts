@@ -1536,7 +1536,7 @@ export declare function getPrismaClient(config: GetPrismaClientConfig): {
          */
         $executeRaw(query: TemplateStringsArray | Sql, ...values: any[]): PrismaPromise_2<unknown, any>;
         /**
-         * Unsafe counterpart of `$executeRaw` that is susceptible to SQL injections
+         * Unsafe counterpart of `$executeRaw` that is susceptible to sql injections
          * @see https://github.com/prisma/prisma/issues/7142
          *
          * @param query
@@ -1570,7 +1570,7 @@ export declare function getPrismaClient(config: GetPrismaClientConfig): {
          */
         $queryRawTyped(typedSql: UnknownTypedSql): PrismaPromise_2<unknown, any>;
         /**
-         * Unsafe counterpart of `$queryRaw` that is susceptible to SQL injections
+         * Unsafe counterpart of `$queryRaw` that is susceptible to sql injections
          * @see https://github.com/prisma/prisma/issues/7142
          *
          * @param query
@@ -1935,7 +1935,7 @@ declare interface Job {
 }
 
 /**
- * Create a SQL query for a list of values.
+ * Create a sql query for a list of values.
  */
 export declare function join(values: readonly RawValue[], separator?: string, prefix?: string, suffix?: string): Sql;
 
@@ -2763,7 +2763,7 @@ declare type QueryOutput = ReadonlyDeep_2<{
 }>;
 
 /**
- * Create raw SQL statement.
+ * Create raw sql statement.
  */
 export declare function raw(value: string): Sql;
 
@@ -2786,7 +2786,7 @@ declare type RawTaggedValue = {
 };
 
 /**
- * Supported value or SQL instance.
+ * Supported value or sql instance.
  */
 export declare type RawValue = Value | Sql;
 
@@ -3304,7 +3304,7 @@ declare enum SpanStatusCode {
 }
 
 /**
- * A SQL instance can be nested within each other to build SQL strings.
+ * A sql instance can be nested within each other to build sql strings.
  */
 export declare class Sql {
     readonly values: Value[];
@@ -3323,7 +3323,7 @@ export declare class Sql {
 
 declare interface SqlDriverAdapter extends SqlQueryable {
     /**
-     * Execute multiple SQL statements separated by semicolon.
+     * Execute multiple sql statements separated by semicolon.
      */
     executeScript(script: string): Promise<void>;
     /**
@@ -3376,7 +3376,7 @@ declare interface SqlResultSet {
 }
 
 /**
- * Create a SQL object from a template string.
+ * Create a sql object from a template string.
  */
 export declare function sqltag(strings: readonly string[], ...values: readonly RawValue[]): Sql;
 
@@ -3593,7 +3593,7 @@ declare function validator<C, M extends Exclude<keyof C, `$${string}`>, O extend
 declare function validator<C, M extends Exclude<keyof C, `$${string}`>, O extends keyof C[M] & Operation, P extends keyof Args<C[M], O>>(client: C, model: M, operation: O, prop: P): <S>(select: Exact<S, Args<C[M], O>[P]>) => S;
 
 /**
- * Values supported by SQL engine.
+ * Values supported by sql engine.
  */
 export declare type Value = unknown;
 
